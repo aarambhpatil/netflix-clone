@@ -1,12 +1,11 @@
-import CardImg from "../assets/cardimg.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-const CardList = ({ title, category }) => {
+const TVShowCardList = ({ title, category }) => {
   const [data, setData] = useState([]);
-  const url = `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`;
+  const url = `https://api.themoviedb.org/3/tv/${category}?language=en-US&page=1`;
   const options = {
     method: "GET",
     headers: {
@@ -29,13 +28,13 @@ const CardList = ({ title, category }) => {
       <Swiper slidesPerView={"auto"} spaceBetween={10} className="mySwiper">
         {data.map((item, index) => (
           <SwiperSlide key={index} className="max-w-72">
-            <Link to={`/movie/${item.id}`}>
+            <Link to={`/tvshows/${item.id}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}
                 alt="Something"
                 className="h-44 w-full object-center object-cover"
               />
-              <p className="text-center pt-2">{item.original_title}</p>
+              <p className="text-center pt-2">{item.original_name}</p>
             </Link>
           </SwiperSlide>
         ))}
@@ -44,4 +43,4 @@ const CardList = ({ title, category }) => {
   );
 };
 
-export default CardList;
+export default TVShowCardList;

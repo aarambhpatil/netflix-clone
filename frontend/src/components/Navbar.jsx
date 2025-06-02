@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 import Logo from "../assets/logo.png";
-import { Link } from "react-router"
+import { Link } from "react-router";
 
 const Navbar = () => {
   return (
@@ -13,9 +13,15 @@ const Navbar = () => {
         />
       </Link>
       <ul className="hidden xl:flex space-x-6">
-        <li className="cursor-pointer hover:text-[#e50914]">Home</li>
-        <li className="cursor-pointer hover:text-[#e50914]">TV Shows</li>
-        <li className="cursor-pointer hover:text-[#e50914]">Movies</li>
+        <Link to="/">
+          <li className="cursor-pointer hover:text-[#e50914]">Home</li>
+        </Link>
+        <Link to="/tvshows">
+          <li className="cursor-pointer hover:text-[#e50914]">TV Shows</li>
+        </Link>
+        <Link to="/movies">
+          <li className="cursor-pointer hover:text-[#e50914]">Movies</li>
+        </Link>
         <li className="cursor-pointer hover:text-[#e50914]">Anime</li>
         <li className="cursor-pointer hover:text-[#e50914]">Games</li>
         <li className="cursor-pointer hover:text-[#e50914]">New & Popular</li>
@@ -34,9 +40,9 @@ const Navbar = () => {
           Get AI Movie Picks
         </button>
         <Link to={"/signin"}>
-        <button className="border border-[#123123] py2 px-4 cursor-pointer">
-          Sign In
-        </button>
+          <button className="border border-[#123123] py2 px-4 cursor-pointer">
+            Sign In
+          </button>
         </Link>
       </div>
     </nav>

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -13,20 +14,20 @@ const SignIn = () => {
       }}
     >
       <div className="max-w-[450px] w-full bg-black bg-opacity-75 rounded px-8 py-14 mx-auto mt-8">
-        <h1 className="text-3xl font-medium text-white mb-7">SignIn</h1>
+        <h1 className="text-3xl font-medium text-white mb-7">Sign In</h1>
         <form action="" className="flex flex-col space-y-4">
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
+            placeholder="John"
             className="w-full h-[50px] bg-[#333] text-white rounded px-5 text-base"
           />
           <input
             type="password"
-            value={username}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="username"
+            placeholder="Enter your Password"
             className="w-full h-[50px] bg-[#333] text-white rounded px-5 text-base"
           />
           <button

@@ -1,9 +1,8 @@
 import { Bookmark, Play } from "lucide-react";
-import HeroBg from "../assets/herobg2.jpg";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-const Hero = () => {
+const MovieHero = () => {
   const [movie, setMovie] = useState(null);
   const url =
     "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
@@ -55,4 +54,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default MovieHero;

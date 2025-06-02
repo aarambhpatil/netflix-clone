@@ -1,0 +1,18 @@
+import Hero from "../../components/HeroComponents/Hero";
+import CardList from "../../components/MovieCardList";
+import Footer from "../../components/Footer";
+
+const Homepage = () => {
+  return (
+    <div className="p-5">
+      <Hero />
+      <CardList title="Now Playing" category="now_playing" />
+      <CardList title="Top Rated" category="top_rated" />
+      <CardList title="Popular" category="popular" />
+      <CardList title="Upcoming" category="upcoming" />
+      <Footer />
+    </div>
+  );
+};
+
+export default Homepage;
