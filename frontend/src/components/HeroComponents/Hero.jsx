@@ -4,21 +4,28 @@ import { Link } from "react-router";
 
 const Hero = () => {
   const [movie, setMovie] = useState(null);
-  const [randomUrl, setRandomUrl] = useState(0)
-  const url =
-    [["https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1", "tvshows"], ["https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1", "movie"]]
+  const [randomUrl, setRandomUrl] = useState(0);
+  const url = [
+    [
+      "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1",
+      "tvshows",
+    ],
+    [
+      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+      "movie",
+    ],
+  ];
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
     },
   };
 
   useEffect(() => {
-    const randomUrlIndex = Math.floor(Math.random() * url.length)
-    setRandomUrl(randomUrlIndex)
+    const randomUrlIndex = Math.floor(Math.random() * url.length);
+    setRandomUrl(randomUrlIndex);
     fetch(url[randomUrl][0], options)
       .then((res) => res.json())
       .then((res) => {
@@ -52,6 +59,9 @@ const Hero = () => {
             Watch Now
           </button>
         </Link>
+      </div>
+      <div className="flex justify-right absolute bottom-28 text-white left-10 text-5xl">
+        {movie.original_name}
       </div>
     </div>
   );

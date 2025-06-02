@@ -35,7 +35,7 @@ const SpecificTVShowPage = () => {
       .then((res) => res.json())
       .then((res) => {
         const trailer = res.results?.find(
-          (vid) => vid.site === "YouTube" && vid.type === "Trailer"
+          (vid) => vid.site === "YouTube" && vid.official === true
         );
         setTrailerKey(trailer?.key || null);
       })

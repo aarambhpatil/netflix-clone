@@ -32,7 +32,7 @@ const Navbar = () => {
           <input
             className="bg-[#333333] px-4 py-2 rounded-full min-w-72 pr-10 outline-none"
             type="text"
-            placeholder="search"
+            placeholder="Search"
           />
           <Search className="absolute top-2 right-4 w-5 h-5" />
         </div>
