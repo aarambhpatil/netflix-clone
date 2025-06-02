@@ -4,8 +4,9 @@ import { Link } from "react-router";
 
 const Hero = () => {
   const [movie, setMovie] = useState(null);
+  const [randomUrl, setRandomUrl] = useState(0)
   const url =
-    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
+    [["https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1", "tvshows"], ["https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1", "movie"]]
   const options = {
     method: "GET",
     headers: {
@@ -16,7 +17,9 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    fetch(url, options)
+    const randomUrlIndex = Math.floor(Math.random() * url.length)
+    setRandomUrl(randomUrlIndex)
+    fetch(url[randomUrl][0], options)
       .then((res) => res.json())
       .then((res) => {
         if (res.results && res.results.length > 0) {
@@ -43,7 +46,7 @@ const Hero = () => {
           <Bookmark className="mr-2 w-4 h-5 md:w-5 md:h-5" />
           Save For Later
         </button>
-        <Link to={`/movie/${movie.id}`}>
+        <Link to={`/${url[randomUrl][1]}/${movie.id}`}>
           <button className="flex justify-center items-center bg-[#e50914] hover:bg-gray-200 text-white py-3 px-4 rounded-full cursor-pointer text-sm md:text-base">
             <Play className="mr-2 w-4 h-5 md:w-5 md:h-5" />
             Watch Now

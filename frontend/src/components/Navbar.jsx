@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/LETSFLIX_logo.png";
 import { Link } from "react-router";
 
 const Navbar = () => {
