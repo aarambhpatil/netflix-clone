@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import User from "./model/userModel.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
 dotenv.config();
 
@@ -12,6 +14,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -94,32 +103,32 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.get("/api/fetch-user", async(req, res) => {
-    const {token} = req.cookies;
-    if(!token){
-        return res.status(401).json({message:"No token provided"})
+app.get("/api/fetch-user", async (req, res) => {
+  const { token } = req.cookies;
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded) {
+      return res.status(401).json({ message: "Invalid Token" });
     }
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        if(!decoded) {
-            return res.status(401).json({message: "Invalid Token"})
-        }
-        const userDoc = await User.findById(decoded.id).select("-password")
-        if(!userDoc){
-            return res.status(400).json({message: "No user found"})
-        }
-        res.status(200).json({user: userDoc})
-    } catch (error) {
-        return res.status(400).json({message: error.message})
+    const userDoc = await User.findById(decoded.id).select("-password");
+    if (!userDoc) {
+      return res.status(400).json({ message: "No user found" });
     }
-})
+    res.status(200).json({ user: userDoc });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+});
 
-app.post('/api/logout', async(req, res) => {
-    res.clearCookie("token");
-    res.status(200).json({message: "Logged Out Successfully"})
-})
+app.post("/api/logout", async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logged Out Successfully" });
+});
 
 app.listen(PORT, () => {
   connectToDB();
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running`);
 });
